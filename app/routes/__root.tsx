@@ -1,10 +1,13 @@
+import fontawesomecss from "@fortawesome/fontawesome-svg-core/styles.css?url";
 import {
   createRootRoute,
+  Link,
   Outlet,
   ScrollRestoration,
 } from "@tanstack/react-router";
 import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import * as React from "react";
+import globalCss from "../global.css?url";
 
 export const Route = createRootRoute({
   meta: () => [
@@ -18,6 +21,10 @@ export const Route = createRootRoute({
     {
       title: "TanStack Start Starter",
     },
+  ],
+  links: () => [
+    { rel: "stylesheet", href: globalCss },
+    { rel: "stylesheet", href: fontawesomecss },
   ],
   component: RootComponent,
 });
@@ -37,6 +44,24 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Meta />
       </Head>
       <Body>
+        <nav className="flex gap-10 px-20 p-10 w-full h-[60px]">
+          <div className="w-[200px]">
+            <Link className="italic text-4xl font-bold" href="/">
+              Orderify
+            </Link>
+          </div>
+          <ul className="text-2xl flex gap-5">
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/orders">Orders</Link>
+            </li>
+            <li>
+              <Link href="/products">Products</Link>
+            </li>
+          </ul>
+        </nav>
         {children}
         <ScrollRestoration />
         <Scripts />
