@@ -17,6 +17,7 @@ import { Route as ProductsIndexImport } from './routes/products/index'
 import { Route as OrdersIndexImport } from './routes/orders/index'
 import { Route as ProductsNewIndexImport } from './routes/products/new/index'
 import { Route as ProductsProductIdIndexImport } from './routes/products/$productId/index'
+import { Route as OrdersOrderIdIndexImport } from './routes/orders/$orderId/index'
 import { Route as ProductsProductIdEditImport } from './routes/products/$productId/edit'
 
 // Create/Update Routes
@@ -54,6 +55,12 @@ const ProductsNewIndexRoute = ProductsNewIndexImport.update({
 const ProductsProductIdIndexRoute = ProductsProductIdIndexImport.update({
   id: '/products/$productId/',
   path: '/products/$productId/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const OrdersOrderIdIndexRoute = OrdersOrderIdIndexImport.update({
+  id: '/orders/$orderId/',
+  path: '/orders/$orderId/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -102,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsProductIdEditImport
       parentRoute: typeof rootRoute
     }
+    '/orders/$orderId/': {
+      id: '/orders/$orderId/'
+      path: '/orders/$orderId'
+      fullPath: '/orders/$orderId'
+      preLoaderRoute: typeof OrdersOrderIdIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/products/$productId/': {
       id: '/products/$productId/'
       path: '/products/$productId'
@@ -127,6 +141,7 @@ export interface FileRoutesByFullPath {
   '/orders': typeof OrdersIndexRoute
   '/products': typeof ProductsIndexRoute
   '/products/$productId/edit': typeof ProductsProductIdEditRoute
+  '/orders/$orderId': typeof OrdersOrderIdIndexRoute
   '/products/$productId': typeof ProductsProductIdIndexRoute
   '/products/new': typeof ProductsNewIndexRoute
 }
@@ -137,6 +152,7 @@ export interface FileRoutesByTo {
   '/orders': typeof OrdersIndexRoute
   '/products': typeof ProductsIndexRoute
   '/products/$productId/edit': typeof ProductsProductIdEditRoute
+  '/orders/$orderId': typeof OrdersOrderIdIndexRoute
   '/products/$productId': typeof ProductsProductIdIndexRoute
   '/products/new': typeof ProductsNewIndexRoute
 }
@@ -148,6 +164,7 @@ export interface FileRoutesById {
   '/orders/': typeof OrdersIndexRoute
   '/products/': typeof ProductsIndexRoute
   '/products/$productId/edit': typeof ProductsProductIdEditRoute
+  '/orders/$orderId/': typeof OrdersOrderIdIndexRoute
   '/products/$productId/': typeof ProductsProductIdIndexRoute
   '/products/new/': typeof ProductsNewIndexRoute
 }
@@ -160,6 +177,7 @@ export interface FileRouteTypes {
     | '/orders'
     | '/products'
     | '/products/$productId/edit'
+    | '/orders/$orderId'
     | '/products/$productId'
     | '/products/new'
   fileRoutesByTo: FileRoutesByTo
@@ -169,6 +187,7 @@ export interface FileRouteTypes {
     | '/orders'
     | '/products'
     | '/products/$productId/edit'
+    | '/orders/$orderId'
     | '/products/$productId'
     | '/products/new'
   id:
@@ -178,6 +197,7 @@ export interface FileRouteTypes {
     | '/orders/'
     | '/products/'
     | '/products/$productId/edit'
+    | '/orders/$orderId/'
     | '/products/$productId/'
     | '/products/new/'
   fileRoutesById: FileRoutesById
@@ -189,6 +209,7 @@ export interface RootRouteChildren {
   OrdersIndexRoute: typeof OrdersIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
   ProductsProductIdEditRoute: typeof ProductsProductIdEditRoute
+  OrdersOrderIdIndexRoute: typeof OrdersOrderIdIndexRoute
   ProductsProductIdIndexRoute: typeof ProductsProductIdIndexRoute
   ProductsNewIndexRoute: typeof ProductsNewIndexRoute
 }
@@ -199,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   OrdersIndexRoute: OrdersIndexRoute,
   ProductsIndexRoute: ProductsIndexRoute,
   ProductsProductIdEditRoute: ProductsProductIdEditRoute,
+  OrdersOrderIdIndexRoute: OrdersOrderIdIndexRoute,
   ProductsProductIdIndexRoute: ProductsProductIdIndexRoute,
   ProductsNewIndexRoute: ProductsNewIndexRoute,
 }
@@ -220,6 +242,7 @@ export const routeTree = rootRoute
         "/orders/",
         "/products/",
         "/products/$productId/edit",
+        "/orders/$orderId/",
         "/products/$productId/",
         "/products/new/"
       ]
@@ -238,6 +261,9 @@ export const routeTree = rootRoute
     },
     "/products/$productId/edit": {
       "filePath": "products/$productId/edit.tsx"
+    },
+    "/orders/$orderId/": {
+      "filePath": "orders/$orderId/index.tsx"
     },
     "/products/$productId/": {
       "filePath": "products/$productId/index.tsx"

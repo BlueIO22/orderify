@@ -8,6 +8,7 @@ import {
 import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import * as React from "react";
 import globalCss from "../global.css?url";
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 export const Route = createRootRoute({
   meta: () => [
