@@ -1,4 +1,8 @@
-import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendar,
+  faPencil,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import dayjs from "dayjs";
@@ -8,14 +12,16 @@ export const Route = createFileRoute("/orders/$orderId/")({
   component: () => {
     const order: Order = Route.useLoaderData();
 
-    const sum = Math.round(
-      order.orderItems
-        .map((x) => x.product.price)
-        .reduce((prev, curr) => {
-          return prev + curr;
-        }),
-      2
-    );
+    const sum =
+      order.orderItems.length > 0
+        ? Math.round(
+            order.orderItems
+              .map((x) => x.product.price)
+              .reduce((prev, curr) => {
+                return prev + curr;
+              })
+          )
+        : 0;
     return (
       <div className="p-20 [&>p]:text-2xl">
         <h1 className="text-3xl">OrderID: {order.id}</h1>
@@ -48,6 +54,26 @@ export const Route = createFileRoute("/orders/$orderId/")({
             </div>
           </>
         )}
+        <div className="mt-5 text-2xl flex gap-5">
+          <Link
+            to={"/orders/$orderId/edit"}
+            params={{
+              orderId: order.id.toString(),
+            }}
+            className="border-2 p-2 hover:bg-primary hover:text-white transition-all"
+          >
+            <FontAwesomeIcon icon={faPencil} size="xs" /> Edit order
+          </Link>
+          <Link
+            to={"/orders/$orderId/edit"}
+            params={{
+              orderId: order.id.toString(),
+            }}
+            className="border-2 p-2 bg-[red] text-white"
+          >
+            <FontAwesomeIcon icon={faTrash} size="xs" /> Delete order
+          </Link>
+        </div>
       </div>
     );
   },

@@ -1,4 +1,6 @@
 import fontawesomecss from "@fortawesome/fontawesome-svg-core/styles.css?url";
+import { faTruckFast } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   createRootRoute,
   Link,
@@ -48,7 +50,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <nav className="flex gap-10 px-20 p-10 w-full h-[60px]">
           <div className="w-[200px]">
             <Link className="italic text-4xl font-bold" href="/">
-              Orderify
+              Orderify <FontAwesomeIcon icon={faTruckFast} size="xs" />
             </Link>
           </div>
           <ul className="text-2xl flex gap-5">

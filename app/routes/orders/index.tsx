@@ -22,7 +22,7 @@ export const Route = createFileRoute("/orders/")({
         </div>
         <div>
           <h1 className="text-3xl">Orders: ({state.length})</h1>
-          <OrderList orders={state} canEdit />
+          <OrderList orders={state} columns={"all"} />
         </div>
       </div>
     );
